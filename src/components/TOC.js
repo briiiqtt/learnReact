@@ -4,13 +4,17 @@ class TOC extends Component {
   render() {
     let data = this.props.data;
     let list = [];
-    console.log(data);
-    console.log(data.length);
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i]);
       list.push(
         <li key={data[i].id}>
-          <a href={"/content/" + data[i].id}>
+          <a
+            href={"/content/" + data[i].id}
+            data-id={data[i].id}
+            onClick={function (e) {
+              e.preventDefault();
+              this.props.onChangePage(e.target.dataset.id);
+            }.bind(this)}
+          >
             {data[i].title} {data[i].desc}
           </a>
         </li>
